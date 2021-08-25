@@ -1,4 +1,4 @@
-package com.example.firebasetest
+package com.example.wifispotter.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -12,7 +12,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.firebasetest.R
 import com.example.firebasetest.databinding.FragmentMapsBinding
+import com.example.wifispotter.CustomClusterRenderer
+import com.example.wifispotter.activities.MainActivity
+import com.example.wifispotter.enums.WifiIconType
+import com.example.wifispotter.models.WifiPoint
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.GoogleMap
@@ -20,7 +25,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -35,13 +39,13 @@ class MapsFragment : Fragment() {
         .getInstance("https://mapsapplication1-fb977-default-rtdb.firebaseio.com/")
         .getReference("points")
 
-    lateinit var clusterManager: ClusterManager<MyItem>
+    lateinit var clusterManager: ClusterManager<MySpotClusterMarker>
     lateinit var map: GoogleMap
 
     lateinit var binding: FragmentMapsBinding
 
 
-    inner class MyItem(
+    inner class MySpotClusterMarker(
         lat: Double,
         lng: Double,
         title: String,
@@ -99,7 +103,7 @@ class MapsFragment : Fragment() {
                     wifiPoint?.latitude?.let { Log.d("123", it) }
 
                     if(wifiPoint != null) {
-                        val item = MyItem(
+                        val item = MySpotClusterMarker(
                             wifiPoint.latitude.toDouble(),
                             wifiPoint.longitude.toDouble(),
                             wifiPoint.ssid.trim(),
@@ -118,8 +122,6 @@ class MapsFragment : Fragment() {
             TODO("Not yet implemented")
         }
     }
-
-    private var locationPermission: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -225,7 +227,8 @@ class MapsFragment : Fragment() {
             val indexOf = permissions.indexOf(Manifest.permission.ACCESS_FINE_LOCATION)
             if(indexOf != -1 && grantResults[indexOf] != PackageManager.PERMISSION_GRANTED){
                 Snackbar.make(requireView(), getString(R.string.location_permission_warning), Snackbar.LENGTH_INDEFINITE).setAction(getString(
-                                    R.string.retry)){
+                    R.string.retry
+                )){
                     requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSION_REQUEST_ACCESS_FINELOCATION)
                 }.show()
             } else {

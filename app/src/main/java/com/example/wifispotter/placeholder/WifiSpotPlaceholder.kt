@@ -1,15 +1,8 @@
-package com.example.firebasetest.placeholder
+package com.example.wifispotter.placeholder
 
-import android.util.Log
-import com.example.firebasetest.MapsFragment
-import com.example.firebasetest.WifiPoint
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import java.util.*
 
-object PlaceholderContent {
+object WifiSpotPlaceholder {
     val ITEMS: MutableList<PlaceholderItem> = ArrayList()
     val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
 

@@ -1,4 +1,4 @@
-package com.example.firebasetest
+package com.example.wifispotter.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firebasetest.placeholder.PlaceholderContent
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.example.firebasetest.R
+import com.example.wifispotter.models.WifiPoint
+import com.example.wifispotter.viewadapters.WifiSpotRecyclerViewAdapter
+import com.example.wifispotter.placeholder.WifiSpotPlaceholder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
 /**
  * A fragment representing a list of Items.
@@ -41,12 +42,12 @@ class ItemFragment : Fragment() {
         val firebase: FirebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebaseReference))
         val reference = firebase.getReference("points").orderByChild("userIdentifier").equalTo(user?.email)
 
-        Log.d("q321", PlaceholderContent.ITEMS.size.toString())
+        Log.d("q321", WifiSpotPlaceholder.ITEMS.size.toString())
 
         val usersListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.value != null) {
-                    PlaceholderContent.clearItems()
+                    WifiSpotPlaceholder.clearItems()
                     for(wifiPointSnapshot in snapshot.children){
                         val wifiPoint : WifiPoint? = wifiPointSnapshot.getValue(WifiPoint::class.java)
 
@@ -54,8 +55,8 @@ class ItemFragment : Fragment() {
 
                         if(wifiPoint != null) {
                             Log.d("Placeholder", "point-added")
-                            PlaceholderContent.addItem(
-                                PlaceholderContent.PlaceholderItem(
+                            WifiSpotPlaceholder.addItem(
+                                WifiSpotPlaceholder.PlaceholderItem(
                                     wifiPointSnapshot.key!!,
                                     wifiPoint.password,
                                     wifiPoint.ssid.trim(),
@@ -70,7 +71,7 @@ class ItemFragment : Fragment() {
                 if(view is RecyclerView){
                     with(view){
                         layoutManager = LinearLayoutManager(context)
-                        adapter = MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                        adapter = WifiSpotRecyclerViewAdapter(WifiSpotPlaceholder.ITEMS)
                     }
                 }
             }

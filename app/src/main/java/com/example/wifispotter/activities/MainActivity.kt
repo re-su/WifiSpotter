@@ -1,45 +1,25 @@
-package com.example.firebasetest
+package com.example.wifispotter.activities
 
-import android.Manifest
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.*
-import android.net.wifi.SupplicantState
-import android.net.wifi.WifiManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
+import com.example.firebasetest.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.google.maps.android.clustering.ClusterItem
-import com.google.maps.android.clustering.ClusterManager
 
 class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController

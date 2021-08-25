@@ -1,7 +1,6 @@
-package com.example.firebasetest
+package com.example.wifispotter.fragments
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,9 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import com.example.firebasetest.MainActivity.Companion.googleSignInClient
+import com.example.firebasetest.R
+import com.example.wifispotter.activities.MainActivity.Companion.googleSignInClient
 import com.example.firebasetest.databinding.FragmentAccountBinding
-import com.example.firebasetest.databinding.FragmentAddBinding
+import com.example.wifispotter.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider

@@ -1,22 +1,21 @@
-package com.example.firebasetest
+package com.example.wifispotter.viewadapters
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import com.example.firebasetest.placeholder.PlaceholderContent.PlaceholderItem
+import com.example.wifispotter.placeholder.WifiSpotPlaceholder.PlaceholderItem
 import com.example.firebasetest.databinding.FragmentItemBinding
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyItemRecyclerViewAdapter(
+class WifiSpotRecyclerViewAdapter(
     private val values: List<PlaceholderItem>
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<WifiSpotRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

@@ -1,4 +1,4 @@
-package com.example.firebasetest
+package com.example.wifispotter.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
